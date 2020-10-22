@@ -1,0 +1,30 @@
+﻿@model IEnumerable<CapstoneShoppingList.Models.Products>
+
+@{
+    ViewData["Title"] = "Products";
+}
+
+<h1>Index</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)
+        {
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => product.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => product.Price)
+                </td>
+            </tr>
+        }
+        </tbody>
+</table>
