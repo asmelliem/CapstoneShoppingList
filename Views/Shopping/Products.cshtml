@@ -37,7 +37,7 @@
         </div>
         <div class="col-sm-6">
             <div class="form-group">
-                <label for="orderList">Select Your Product</label>
+                <label for="orderList" class="font-weight-bold">Select Your Product</label>
                 <select class="form-control" id="orderProduct">
                     @foreach (var product in Model)
                     {
@@ -45,6 +45,11 @@
                     }
                 </select>
             </div>
+            <div class="form-group">
+                <label for="quantity" class="font-weight-bold">Enter Quantity</label>
+                <input class="form-control" id="quantity">
+            </div>
+            <button type="submit" class="btn btn-primary mb-2">Add</button>
         </div>
     </div>
 </div>
