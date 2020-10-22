@@ -21,7 +21,7 @@ namespace CapstoneShoppingList.Controllers
 
         public async Task<IActionResult> Products()
         {
-            var products = await _context.Products.Select(p => new Products { Name = p.Name, Price = p.Price }).ToListAsync();
+            var products = await _context.Products.Select(p => new Products { Id = p.Id, Name = p.Name, Price = p.Price }).ToListAsync();
             return View(products);
         }
     }
