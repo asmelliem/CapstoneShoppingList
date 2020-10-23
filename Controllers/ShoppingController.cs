@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Threading.Tasks;
 using CapstoneShoppingList.Context;
@@ -23,6 +24,11 @@ namespace CapstoneShoppingList.Controllers
         {
             var products = await _context.Products.Select(p => new Products { Id = p.Id, Name = p.Name, Price = p.Price }).ToListAsync();
             return View(products);
+        }
+
+        public IActionResult Cart(Orders order)
+        {
+            return View();
         }
     }
 }

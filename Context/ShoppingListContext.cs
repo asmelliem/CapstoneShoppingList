@@ -16,6 +16,7 @@ namespace CapstoneShoppingList.Context
         {
         }
 
+        public virtual DbSet<Orders> Orders { get; set; }
         public virtual DbSet<Products> Products { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -29,6 +30,22 @@ namespace CapstoneShoppingList.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Orders>(entity =>
+            {
+                entity.Property(e => e.Id)
+                    .HasColumnName("ID")
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.ProductId).HasColumnName("ProductID");
+
+                entity.Property(e => e.Total).HasColumnType("decimal(20, 2)");
+
+                entity.HasOne(d => d.Product)
+                    .WithMany(p => p.Orders)
+                    .HasForeignKey(d => d.ProductId)
+                    .HasConstraintName("FK__Orders__ProductI__3A81B327");
+            });
+
             modelBuilder.Entity<Products>(entity =>
             {
                 entity.Property(e => e.Id).HasColumnName("ID");
@@ -36,6 +53,8 @@ namespace CapstoneShoppingList.Context
                 entity.Property(e => e.Name)
                     .HasMaxLength(255)
                     .IsUnicode(false);
+
+                entity.Property(e => e.Price).HasColumnType("decimal(20, 2)");
             });
 
             OnModelCreatingPartial(modelBuilder);
