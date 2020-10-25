@@ -1,5 +1,4 @@
-﻿@model IEnumerable<CapstoneShoppingList.Models.Products>
-
+﻿@model OrderItem
 
 @{
     ViewData["Title"] = "Products";
@@ -20,7 +19,7 @@
                         Price
                     </div>
                 </div>
-                @foreach (var product in Model)
+                @foreach (var product in Model.Products)
                 {
                     <div class="row">
                         <div class="col-sm-2">
@@ -37,22 +36,32 @@
             </div>
         </div>
         <div class="col-sm-6">
+            @using (Html.BeginForm())
+            {
             <form>
                 <div class="form-group">
+                    <label for="orderId" class="font-weight-bold">Order ID</label>
+                    <input class="form-control" value="@Model.Orderid" disabled>
+                </div>
+                <div class="form-group">
+                    <input class="form-control" name="orderId" value="@Model.Orderid" type="hidden">
+                </div>
+                <div class="form-group">
                     <label for="orderList" class="font-weight-bold">Select Your Product</label>
-                    <select class="form-control" id="orderProduct">
-                        @foreach (var product in Model)
+                    <select class="form-control" name="orderProduct">
+                        @foreach (var product in Model.Products)
                         {
-                            <option>@Html.DisplayFor(modelItem => product.Name)</option>
+                            <option value="@product.Id">@Html.DisplayFor(modelItem => product.Name)</option>
                         }
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="quantity" class="font-weight-bold">Enter Quantity</label>
-                    <input class="form-control" id="quantity">
+                    <input type="number" class="form-control" name="quantity">
                 </div>
-                <button type="submit" class="btn btn-primary mb-2">Add</button>
-            </form>            
+                <button type="submit" value="Add" class="btn btn-primary mb-2">Add</button>
+            </form>
+            }
         </div>
     </div>
 </div>

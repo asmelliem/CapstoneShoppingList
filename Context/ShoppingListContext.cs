@@ -38,8 +38,6 @@ namespace CapstoneShoppingList.Context
 
                 entity.Property(e => e.ProductId).HasColumnName("ProductID");
 
-                entity.Property(e => e.Total).HasColumnType("decimal(20, 2)");
-
                 entity.HasOne(d => d.Product)
                     .WithMany(p => p.Orders)
                     .HasForeignKey(d => d.ProductId)

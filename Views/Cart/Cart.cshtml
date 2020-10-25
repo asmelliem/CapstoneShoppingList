@@ -1,0 +1,64 @@
+﻿@model Cart
+@{
+    ViewData["Title"] = "Products";
+}
+
+@using (Html.BeginForm())
+{
+    <form>
+        <div class="form-group">
+            <label for="orderId" class="font-weight-bold">Enter Order ID</label>
+            <input class="form-control" name="orderId">
+        </div>
+        <button type="submit" class="btn btn-primary mb-2">Look Up</button>
+    </form>
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-8 font-weight-bold">
+                        Name
+                    </div>
+                    <div class="col-sm-2 font-weight-bold">
+                        Quantity
+                    </div>
+                    <div class="col-sm-2 font-weight-bold">
+                        Total
+                    </div>
+                </div>
+                @foreach (var orderItem in Model.Products)
+                {
+                    <div class="row">
+                        <div class="col-sm-8">
+                            @Html.DisplayFor(modelItem => orderItem.Name)
+                        </div>
+                        <div class="col-sm-2">
+                            @Html.DisplayFor(modelItem => orderItem.Quantity)
+                        </div>
+                        <div class="col-sm-2">
+                            $@Html.DisplayFor(modelItem => orderItem.Total)
+                        </div>
+                    </div>
+                }
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="col-sm-6 offset-10">
+        <div class="row">
+            Total:  $@Html.DisplayFor(modelItem => Model.Total)
+        </div>
+        <div class="row">
+            Tax:  $@Html.DisplayFor(modelItem => Model.Tax)
+        </div>
+        <div class="row">
+            SubTotal:  $@Html.DisplayFor(modelItem => Model.SubTotal)
+        </div>
+    </div>
+</div>
