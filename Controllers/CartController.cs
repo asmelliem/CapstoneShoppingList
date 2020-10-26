@@ -34,7 +34,7 @@ namespace CapstoneShoppingList.Controllers
             foreach (var orderItem in products)
             {
                 var quantity = order.First(o => o.ProductId == orderItem.Id).Quantity;
-                cart.Total += orderItem.Price ?? 0;
+                cart.Total += orderItem.Price * quantity ?? 0;
                 cart.Products.Add(MapProduct(orderItem, quantity));
             }    
             return View(cart);
